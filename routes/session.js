@@ -71,7 +71,8 @@ router.post('/create', verifyToken, async (req, res) => {
                name: name,
                description: description,
                start: start,
-               duration: duration  
+               duration: duration,
+               created: new Date().toISOString() 
            }
            const CreatedSession = await db.query("INSERT INTO session SET ?", data, (err, resp) => {
                if (err) {
@@ -99,7 +100,8 @@ router.put('/update/:session_id', verifyToken, async (req, res) => {
                name: name,
                description: description,
                start: start,
-               duration: duration  
+               duration: duration,
+               updated: new Date().toISOString()
            }
            const CreatedSession = await db.query("UPDATE session SET ? WHERE ID = ? AND userID = ?", [data, session_id, userID], (err, resp) => {
                if (err) {
